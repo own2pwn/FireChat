@@ -14,6 +14,7 @@
 		4EA1E61F1D95DEF000A02E19 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4EA1E61E1D95DEF000A02E19 /* Assets.xcassets */; };
 		4EA1E6221D95DEF000A02E19 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4EA1E6201D95DEF000A02E19 /* LaunchScreen.storyboard */; };
 		4EA1E62A1D95E0DD00A02E19 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4EA1E6291D95E0DD00A02E19 /* GoogleService-Info.plist */; };
+		4EA1E62D1D95E8A600A02E19 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA1E62C1D95E8A600A02E19 /* LoginVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		4EA1E6211D95DEF000A02E19 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4EA1E6231D95DEF000A02E19 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4EA1E6291D95E0DD00A02E19 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		4EA1E62C1D95E8A600A02E19 /* LoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		6AA9B0A3BA17536C351FAE9C /* Pods_FireChat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FireChat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		79504C4678D4017F0359F52B /* Pods-FireChat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FireChat.release.xcconfig"; path = "Pods/Target Support Files/Pods-FireChat/Pods-FireChat.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -63,8 +65,8 @@
 		4EA1E6161D95DEF000A02E19 /* FireChat */ = {
 			isa = PBXGroup;
 			children = (
+				4EA1E62B1D95E88300A02E19 /* Controller */,
 				4EA1E6171D95DEF000A02E19 /* AppDelegate.swift */,
-				4EA1E6191D95DEF000A02E19 /* ViewController.swift */,
 				4EA1E61B1D95DEF000A02E19 /* Main.storyboard */,
 				4EA1E61E1D95DEF000A02E19 /* Assets.xcassets */,
 				4EA1E6201D95DEF000A02E19 /* LaunchScreen.storyboard */,
@@ -72,6 +74,15 @@
 				4EA1E6291D95E0DD00A02E19 /* GoogleService-Info.plist */,
 			);
 			path = FireChat;
+			sourceTree = "<group>";
+		};
+		4EA1E62B1D95E88300A02E19 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				4EA1E6191D95DEF000A02E19 /* ViewController.swift */,
+				4EA1E62C1D95E8A600A02E19 /* LoginVC.swift */,
+			);
+			name = Controller;
 			sourceTree = "<group>";
 		};
 		899C14189E3D2A4354A46868 /* Pods */ = {
@@ -217,6 +228,7 @@
 			files = (
 				4EA1E61A1D95DEF000A02E19 /* ViewController.swift in Sources */,
 				4EA1E6181D95DEF000A02E19 /* AppDelegate.swift in Sources */,
+				4EA1E62D1D95E8A600A02E19 /* LoginVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
