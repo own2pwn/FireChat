@@ -11,6 +11,11 @@ import Firebase
 
 class ViewController: UIViewController {
     
+    // MARK: - Properties
+    
+    var ref: FIRDatabaseReference!
+    private var _refHandle: FIRDatabaseHandle!
+    
     // MARK: - Outlets
     
     @IBOutlet var tableView: UITableView!    
@@ -33,9 +38,11 @@ class ViewController: UIViewController {
         
         textField.delegate = self
         
+        configureDatabase()
+        
         /* Add an observer to fire whenever the keyboard is shown or hidden */
         //NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillShow", name: NSNotification.Name.UIKeyboardWillShow, object: self.view.window)
-        //NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow"), name: UIKeyboardWillShowNotification, object: self.view.window)
+        
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardWillShow), name: UIKeyboardWillShowNotification, object: self.view.window)
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardWillHide), name: UIKeyboardWillHideNotification, object: self.view.window)
@@ -74,9 +81,51 @@ class ViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    // MARK: - Firbase Database methods
+    
+    func configureDatabase() {
+        
+        ref = FIRDatabase.database().reference()
+        
+        /* Create an observer */
+        _refHandle = self.ref.child("messages").observeEventType(.ChildAdded, withBlock: { snapshot in
+            
+            self.messages.append(snapshot)
+            
+            self.tableView.insertRowsAtIndexPaths([NSIndexPath(forRow: self.messages.count - 1, inSection: 0)], withRowAnimation: .Automatic)
+            
+            
+        })
+        
+        //        _refHandle = self.ref.child("messages").observe(.childAdded, with: {(snapshot) -> Void in
+        //
+        //            self.messages.append(snapshot)
+        //
+        //            }
+        //
+        //            )
+        
+        
+        
+    }
+    
+    deinit {
+        
+        self.ref.child("messages").removeObserverWithHandle(_refHandle)
+    }
+    
+    func sendMessage(data: [String: String]) {
+        
+        let packet = data
+        
+        self.ref.child("messages").childByAutoId().setValue(packet)
+    }
 
 
 }
+
+// MARK: - Table View Delegate Methods
 
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
     
@@ -96,9 +145,11 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         
         let message = messageSnapshot.value as! [String: String]
         
-        let text = message["text"] as String!
-        
-        cell.textLabel?.text = text
+        //let text = message["text"] as String!
+        if let text = message[Constants.MessageFields.text] as String! {
+            
+            cell.textLabel?.text = text
+        }    
         
         return cell
         
@@ -106,20 +157,9 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     
 }
 
-extension ViewController: UITextFieldDelegate {
-    
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
-        
-        print("The text field should return")
-        
-        self.view.endEditing(true)
-        
-        return true
-    }
-    
-}
+// MARK: - Improve keyboard behavoir
 
-extension ViewController {
+extension ViewController: UITextFieldDelegate {
     
     func keyboardWillShow(sender: NSNotification) {
         let userInfo: [NSObject: AnyObject] = sender.userInfo!
@@ -155,5 +195,16 @@ extension ViewController {
         let keyboardSize: CGSize = userInfo[UIKeyboardFrameBeginUserInfoKey]!.CGRectValue().size
         
         self.view.frame.origin.y += keyboardSize.height
+    }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        
+        let data = [Constants.MessageFields.text: textField.text! as String]
+        
+        sendMessage(data)
+        
+        self.view.endEditing(true)
+        
+        return true
     }
 }
