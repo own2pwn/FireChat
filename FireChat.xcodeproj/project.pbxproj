@@ -15,6 +15,7 @@
 		4EA1E6221D95DEF000A02E19 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4EA1E6201D95DEF000A02E19 /* LaunchScreen.storyboard */; };
 		4EA1E62A1D95E0DD00A02E19 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4EA1E6291D95E0DD00A02E19 /* GoogleService-Info.plist */; };
 		4EA1E62D1D95E8A600A02E19 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA1E62C1D95E8A600A02E19 /* LoginVC.swift */; };
+		4EA1E62F1D95F9EC00A02E19 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA1E62E1D95F9EC00A02E19 /* Utilities.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		4EA1E6231D95DEF000A02E19 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4EA1E6291D95E0DD00A02E19 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4EA1E62C1D95E8A600A02E19 /* LoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
+		4EA1E62E1D95F9EC00A02E19 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		6AA9B0A3BA17536C351FAE9C /* Pods_FireChat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FireChat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		79504C4678D4017F0359F52B /* Pods-FireChat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FireChat.release.xcconfig"; path = "Pods/Target Support Files/Pods-FireChat/Pods-FireChat.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -72,6 +74,7 @@
 				4EA1E6201D95DEF000A02E19 /* LaunchScreen.storyboard */,
 				4EA1E6231D95DEF000A02E19 /* Info.plist */,
 				4EA1E6291D95E0DD00A02E19 /* GoogleService-Info.plist */,
+				4EA1E62E1D95F9EC00A02E19 /* Utilities.swift */,
 			);
 			path = FireChat;
 			sourceTree = "<group>";
@@ -228,6 +231,7 @@
 			files = (
 				4EA1E61A1D95DEF000A02E19 /* ViewController.swift in Sources */,
 				4EA1E6181D95DEF000A02E19 /* AppDelegate.swift in Sources */,
+				4EA1E62F1D95F9EC00A02E19 /* Utilities.swift in Sources */,
 				4EA1E62D1D95E8A600A02E19 /* LoginVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

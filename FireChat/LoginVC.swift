@@ -47,6 +47,11 @@ class LoginVC: UIViewController {
         view.endEditing(true)
     }
     
+    func blockGarbageIn() {
+        
+        // TODO: Check a text field string for obvious mistakes
+    }
+    
     // MARK: - Actions
     
     @IBAction func loginTapped(sender: AnyObject) {
@@ -62,13 +67,17 @@ class LoginVC: UIViewController {
         FIRAuth.auth()?.signInWithEmail(email, password: password) { (user, error) in
             
             if let error = error {
+                
                 print("Awww .... there was an error: \(error.localizedDescription)")
+                
+                Utilities().showAlert("Error!", message: error.localizedDescription, viewController: self)
+                
                 return
             }
             
             print("Successfully signed in! ")
             
-            
+            Utilities().showAlert("Success!", message: "You have successfully logged in.  Way to go.", viewController: self)
             
             
         }
@@ -76,6 +85,47 @@ class LoginVC: UIViewController {
     
     
     @IBAction func registerTapped(sender: AnyObject) {
+        
+        // TODO: Check the text field string for obvious mistakes
+        
+        let alert = UIAlertController(title: "Register", message: "Please confirm you password.", preferredStyle: .Alert)
+        alert.addTextFieldWithConfigurationHandler() { textfield in
+            
+            textfield.placeholder = "password"
+            
+        }
+        
+        alert.addAction(UIAlertAction(title: "Cancel", style: .Default, handler: nil))
+        
+        alert.addAction(UIAlertAction(title: "OK", style: .Default) { action in
+            
+            /* Allow the user to register */
+            
+            let passwordConfirmation = alert.textFields![0] as UITextField
+            
+            if passwordConfirmation.text!.isEqual(self.passwordTextField.text!) {
+                
+                let email = self.emailTextField.text
+                let password = self.passwordTextField.text
+                
+                FIRAuth.auth()?.createUserWithEmail(email!, password: password!) { user, error in
+                    
+                    if let error = error {
+                        Utilities().showAlert("Error", message: error.localizedDescription, viewController: self)
+                        return
+                    }
+                    
+                    self.dismissViewControllerAnimated(true, completion: nil)
+                    
+                }
+                
+            } else {
+                Utilities().showAlert("Error", message: "The passwords do not match", viewController: self)
+            }
+            
+        })
+        
+        self.presentViewController(alert, animated: true, completion: nil)
     }
     
 
