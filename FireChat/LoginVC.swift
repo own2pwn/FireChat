@@ -130,5 +130,25 @@ class LoginVC: UIViewController {
     
 
     @IBAction func forgotPasswordTapped(sender: AnyObject) {
+        
+        guard emailTextField.text != nil else {
+            return
+        }
+        
+        if !emailTextField.text!.isEmpty {
+            
+            let email = self.emailTextField.text!
+            
+            FIRAuth.auth()?.sendPasswordResetWithEmail(email) { error in
+                
+                if let error = error {
+                    Utilities().showAlert("Error", message: error.localizedDescription, viewController: self)
+                    return
+                }
+                
+                Utilities().showAlert("Got it", message: "Check your email for instructions on how to reset your password", viewController: self)
+                
+            }
+        }
     }
 }
