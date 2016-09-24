@@ -20,4 +20,14 @@ class Utilities {
         
     }
     
+    func getDate() -> String {
+        
+        let today: NSDate = NSDate()
+        
+        let dateFormatter: NSDateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "MM-dd-yyyy HH:mm"
+        
+        return dateFormatter.stringFromDate(today)
+    }
+    
 }

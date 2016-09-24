@@ -117,7 +117,8 @@ class ViewController: UIViewController {
     
     func sendMessage(data: [String: String]) {
         
-        let packet = data
+        var packet = data
+        packet[Constants.MessageFields.dateTime] = Utilities().getDate()
         
         self.ref.child("messages").childByAutoId().setValue(packet)
     }
@@ -149,7 +150,12 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         if let text = message[Constants.MessageFields.text] as String! {
             
             cell.textLabel?.text = text
-        }    
+        }
+        
+        if let subText = message[Constants.MessageFields.dateTime] {
+            
+            cell.detailTextLabel?.text = subText
+        }
         
         return cell
         
@@ -199,9 +205,15 @@ extension ViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         
+        guard textField.text?.characters.count != 0 else {
+            return true
+        }
+        
         let data = [Constants.MessageFields.text: textField.text! as String]
         
         sendMessage(data)
+        
+        textField.text = ""
         
         self.view.endEditing(true)
         
